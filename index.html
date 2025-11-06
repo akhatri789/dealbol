@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dead Stock Bulk Seller</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f7f9;
+      --fg: #1f2933;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    header.hero {
+      background: linear-gradient(135deg, #111827, #1f2933);
+      color: #f9fafb;
+      padding: clamp(4rem, 8vw, 6rem) 1.5rem;
+      text-align: center;
+    }
+
+    .hero__content {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hero__content h1 {
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
+      margin-bottom: 1rem;
+    }
+
+    .hero__content p {
+      font-size: 1.125rem;
+      margin-bottom: 2rem;
+      color: rgba(249, 250, 251, 0.85);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 1.75rem;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    main {
+      display: grid;
+      gap: clamp(4rem, 10vw, 6rem);
+      padding: clamp(3rem, 8vw, 6rem) 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    section p.section-lead {
+      text-align: center;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0.5rem auto 2rem;
+      font-size: 1.05rem;
+    }
+
+    .inventory__grid,
+    .benefits__grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .inventory__grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .benefits__grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      text-align: center;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      box-shadow: 0 14px 35px -24px rgba(15, 23, 42, 0.45);
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .card .meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .process ol {
+      counter-reset: step;
+      display: grid;
+      gap: 1.5rem;
+      padding: 0;
+      list-style: none;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .process li {
+      position: relative;
+      padding-left: 4.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding-block: 1.5rem;
+      padding-inline: 4.5rem 1.75rem;
+      box-shadow: 0 18px 40px -28px rgba(15, 23, 42, 0.4);
+    }
+
+    .process li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      inset-inline-start: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+    }
+
+    blockquote {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-left: 4px solid var(--accent);
+      padding: 2rem;
+      border-radius: 18px;
+      font-style: italic;
+      color: var(--fg);
+      box-shadow: 0 12px 34px -24px rgba(15, 23, 42, 0.35);
+    }
+
+    blockquote cite {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      color: var(--muted);
+    }
+
+    .contact {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      align-items: start;
+    }
+
+    form {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2rem;
+      display: grid;
+      gap: 1.25rem;
+      box-shadow: 0 16px 45px -28px rgba(15, 23, 42, 0.35);
+    }
+
+    label {
+      display: grid;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font: inherit;
+      transition: border 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+    }
+
+    button[type="submit"] {
+      justify-self: start;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.85rem 1.75rem;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    button[type="submit"]:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .contact__alt {
+      background: rgba(37, 99, 235, 0.06);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      border-radius: 18px;
+      padding: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .contact__alt h3 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: #111827;
+      color: #e5e7eb;
+    }
+
+    footer nav {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: #93c5fd;
+      font-weight: 500;
+    }
+
+    @media (max-width: 600px) {
+      .process li {
+        padding-inline: 3.5rem 1.5rem;
+      }
+
+      .process li::before {
+        inset-inline-start: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" id="hero">
+    <div class="hero__content">
+      <h1>Move Your Dead Stock Fast</h1>
+      <p>We specialise in clearing bulk inventory for trusted partners with fair, transparent offers.</p>
+      <a class="btn btn-primary" href="#contact">Get Started</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="inventory" id="inventory">
+      <h2>Featured Lots</h2>
+      <p class="section-lead">A snapshot of current inventory available for fast clearance. Reach out for the full, frequently updated list.</p>
+      <div class="inventory__grid">
+        <article class="card">
+          <h3>Electronics Lot A</h3>
+          <p class="meta">250 units · Mixed accessories</p>
+          <p>Wholesale price: ₹75,000</p>
+          <a class="btn" href="#contact">Request Details</a>
+        </article>
+        <article class="card">
+          <h3>Apparel Mix B</h3>
+          <p class="meta">400 units · Branded apparel</p>
+          <p>Wholesale price: ₹1,10,000</p>
+          <a class="btn" href="#contact">Request Details</a>
+        </article>
+        <article class="card">
+          <h3>Home Goods C</h3>
+          <p class="meta">180 units · Home &amp; kitchen</p>
+          <p>Wholesale price: ₹62,000</p>
+          <a class="btn" href="#contact">Request Details</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="benefits" id="benefits">
+      <h2>Why Sellers Choose Us</h2>
+      <p class="section-lead">We partner closely with each seller to deliver smooth, profitable clearance experiences.</p>
+      <div class="benefits__grid">
+        <div class="card">
+          <h3>Verified Buyers</h3>
+          <p>We work only with vetted wholesale buyers ready to purchase in bulk.</p>
+        </div>
+        <div class="card">
+          <h3>Fair Offers</h3>
+          <p>Transparent pricing built on real-time market demand and product condition.</p>
+        </div>
+        <div class="card">
+          <h3>Fast Closure</h3>
+          <p>Close deals quickly with our logistics and payment partners standing by.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="process" id="process">
+      <h2>How It Works</h2>
+      <ol>
+        <li>Share your inventory details and target price via the contact form or WhatsApp.</li>
+        <li>We match your stock with interested buyers and negotiate on your behalf.</li>
+        <li>We coordinate payment and logistics so you can clear space with confidence.</li>
+      </ol>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+      <h2>What Partners Say</h2>
+      <blockquote>
+        “They moved our excess inventory in under two weeks and kept us informed at every step.”
+        <cite>— A satisfied vendor</cite>
+      </blockquote>
+    </section>
+
+    <section id="contact" class="contact">
+      <div>
+        <h2>Contact Us</h2>
+        <form>
+          <label>
+            Name
+            <input type="text" name="name" placeholder="Full name" required />
+          </label>
+          <label>
+            Company
+            <input type="text" name="company" placeholder="Business name" />
+          </label>
+          <label>
+            Inventory Details
+            <textarea name="inventory" rows="4" placeholder="Describe products, quantities, and desired pricing" required></textarea>
+          </label>
+          <label>
+            Phone
+            <input type="tel" name="phone" placeholder="+91 98765 43210" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" placeholder="name@example.com" required />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div class="contact__alt">
+        <h3>Prefer WhatsApp?</h3>
+        <p><a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener">Chat with us directly</a> for quick responses.</p>
+        <p>Or email us at <a href="mailto:hello@example.com">hello@example.com</a></p>
+        <p>Office hours: Mon–Sat, 9:30am – 7:00pm IST</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2024 Your Company Name · <a href="#privacy">Privacy</a> · <a href="#terms">Terms</a></p>
+    <nav>
+      <a href="#hero">Home</a>
+      <a href="#inventory">Inventory</a>
+      <a href="#benefits">Why Us</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </footer>
+</body>
+</html>
